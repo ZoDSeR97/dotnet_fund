@@ -22,7 +22,7 @@ PrintEach(stratovolcanoEruptions, "Stratovolcano eruptions.");
 List<Eruption> result = new List<Eruption>();
 
 /* Getting first element */
-Eruption? FirstEruption = eruptions.Select(item => item).First();
+Eruption? FirstEruption = eruptions.FirstOrDefault();
 if (FirstEruption!=null){
     result.Add(FirstEruption); 
     PrintEach(result, "First Element in List");
@@ -31,7 +31,7 @@ if (FirstEruption!=null){
     Console.WriteLine("List is empty");
 
 /* Getting first "Hawaiian Is" location */
-Eruption? firstHawaiianIs = eruptions.Where(item => String.Compare(item.Location, "Hawaiian Is") == 0).FirstOrDefault();
+Eruption? firstHawaiianIs = eruptions.FirstOrDefault(item => String.Compare(item.Location, "Hawaiian Is") == 0);
 if(firstHawaiianIs != null){
     result.Add(firstHawaiianIs);
     PrintEach(result, "First Hawaiian Is location");
@@ -54,8 +54,7 @@ else
 result.Clear();
 
 /* Getting first "New Zealand" location */
-Eruption? firstZealand1900 = eruptions.Where(item => String.Compare(item.Location, "New Zealand") == 0 && item.Year > 1900)
-    .FirstOrDefault();
+Eruption? firstZealand1900 = eruptions.FirstOrDefault(item => String.Compare(item.Location, "New Zealand") == 0 && item.Year > 1900);
 if (firstZealand1900 != null)
 {
     result.Add(firstZealand1900);
@@ -74,7 +73,7 @@ else
     Console.WriteLine("No Eruption over 2000m elevation");
 
 /* All vocano's name starts with 'L' */
-List<Eruption> LVolcano = eruptions.Where(item=>char.Equals(item.Volcano[0],'L')).ToList();
+List<Eruption> LVolcano = eruptions.Where(item=>item.Volcano.StartsWith('L')).ToList();
 if(LVolcano.Count>0)
     PrintEach(LVolcano, "All volcano's name start with 'L'");
 else
